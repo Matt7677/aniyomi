@@ -29,7 +29,7 @@ class AniSkipApi {
     // credits: https://github.com/saikou-app/saikou/blob/main/app/src/main/java/ani/saikou/others/AniSkip.kt
     fun getResult(malId: Int, episodeNumber: Int, episodeLength: Long): List<Stamp>? {
         val url =
-            "https://aniskipx-production.up.railway.app/skip-times/$malId/$episodeNumber?types[]=ed" +
+            "https://aniskipx-production.up.railway.app/v2/skip-times/$malId/$episodeNumber?types[]=ed" +
                 "&types[]=mixed-ed&types[]=mixed-op&types[]=op&types[]=recap&episodeLength=$episodeLength"
         return try {
             val a = client.newCall(GET(url)).execute().body.string()
