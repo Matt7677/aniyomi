@@ -133,6 +133,11 @@ class PlayerActivity : BaseActivity() {
 
     private val storageManager: StorageManager = Injekt.get()
 
+    
+    
+
+    // credits: https://github.com/saikou-app/saikou/blob/main/app/src/main/java/ani/saikou/others/AniSkip.kt
+    
     companion object {
         fun newIntent(
             context: Context,
@@ -152,22 +157,17 @@ class PlayerActivity : BaseActivity() {
 
         private const val MAX_BRIGHTNESS = 255F
     }
-    fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Long, length: Int) {
+    fun updateAniskip() {
         val client = OkHttpClient()
-        val json = JSONObject().apply {
-            put("animeId", animeId)
-            put("episodeId", episodeId)
-            put("vidIndex", vidIndex)
-            put("length", length)
-        }
-        val requestBody = json.toString().toRequestBody("application/json".toMediaType())
+        val animeId = intent.extras!!.getLong("animeId", -1)
+        val episodeId = intent.extras!!.getLong("episodeId", -1)
+        val vidIndex = intent.extras!!.getInt("vidIndex", 0)
+        val url = "http://localhost:5000/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex&episodeLength=$episodeLength"
         val request = Request.Builder()
-        .url("http://localhost:5000/v2/add-skips")
-        .post(requestBody)
-        .build()
-        client.newCall(request).execute().use { response ->
-            val n = 0
-    }
+            .url(url)
+            .build()
+        val response = client.newCall(request).execute()
+        return response.body?.string() ?: "No response body"}
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
@@ -1523,8 +1523,8 @@ class PlayerActivity : BaseActivity() {
             val episodeId = intent.getLongExtra("episodeId", -1L)
             val vidIndex = intent.getLongExtra("vidIndex", 0)
             val length = viewModel.getAnimeSkipIntroLength()
-            sendAnimeData(animeId, episodeId, vidIndex, length)
             playerControls.resetControlsFade()
+            updateAniskip()
         }
     }
 
