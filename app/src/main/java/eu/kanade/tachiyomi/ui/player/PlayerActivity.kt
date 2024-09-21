@@ -156,7 +156,7 @@ class PlayerActivity : BaseActivity() {
         try {
             client.newCall(request).execute()
         } catch (e: Exception) {
-            Log.e("UpdateAniskipError","Error ${e.message}",e)
+            Log.e("UpdateAniskipError", "Error ${e.message}", e)
         }
     }
     override fun onNewIntent(intent: Intent) {
