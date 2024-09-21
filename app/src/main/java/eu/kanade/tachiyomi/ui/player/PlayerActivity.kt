@@ -2,6 +2,7 @@ package eu.kanade.tachiyomi.ui.player
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -156,7 +157,13 @@ class PlayerActivity : BaseActivity() {
         try {
             client.newCall(request).execute()
         } catch (e: Exception) {
-            Log.e("UpdateAniskipError", "Error ${e.message}", e)
+            runOnUiThread {
+                AlertDialog.Builder(this)
+                    .setTitle("Erro")
+                    .setMessage(e.message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+            }
         }
     }
     override fun onNewIntent(intent: Intent) {
