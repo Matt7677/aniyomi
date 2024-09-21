@@ -1512,10 +1512,8 @@ class PlayerActivity : BaseActivity() {
             doubleTapSeek(viewModel.getAnimeSkipIntroLength(), isDoubleTap = false)
             updateAniskip()
             playerControls.resetControlsFade()
-            
         }
     }
-
     /**
      * Updates the player UI text and controls in a separate thread
      */
