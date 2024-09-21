@@ -1514,9 +1514,6 @@ class PlayerActivity : BaseActivity() {
             playerControls.resetControlsFade()
         }
     }
-    /**
-     * Updates the player UI text and controls in a separate thread
-     */
     internal fun refreshUi() {
         viewModel.viewModelScope.launchUI {
             setVisibilities()
