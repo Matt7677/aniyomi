@@ -119,6 +119,37 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
 
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+
+fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidIndex: Int, length: Long) {
+    val client = OkHttpClient()
+
+    val json = JSONObject().apply {
+        put("animeId", animeId)
+        put("episodeId", episodeId)
+        put("vidList", vidList)
+        put("vidIndex", vidIndex)
+        put("length", length)  // Adicionando o argumento 'length'
+    }
+
+    val requestBody = json.toString().toRequestBody("application/json".toMediaType())
+    val request = Request.Builder()
+        .url("http://localhost:5000/v2/add-skips")  // Coloque o URL da API aqui
+        .post(requestBody)
+        .build()
+
+    client.newCall(request).execute().use { response ->
+        if (!response.isSuccessful) throw IOException("Unexpected code $response")
+        println(response.body?.string())
+    }
+}
+
+
+
 class PlayerActivity : BaseActivity() {
 
     internal val viewModel by viewModels<PlayerViewModel>()
@@ -1498,6 +1529,13 @@ class PlayerActivity : BaseActivity() {
             AniSkipApi.PlayerUtils(binding, aniSkipInterval!!).skipAnimation(skipType!!)
         } else if (playerControls.binding.controlsSkipIntroBtn.text != "") {
             doubleTapSeek(viewModel.getAnimeSkipIntroLength(), isDoubleTap = false)
+            val animeId = intent.getLongExtra("animeId", -1L)
+            val episodeId = intent.getLongExtra("episodeId", -1L)
+            val vidIndex = intent.getIntExtra("vidIndex", 0)
+            val vidListSerialized = intent.getStringExtra("vidList")
+            val vidList = vidListSerialized?.deserialize<List<String>>() ?: listOf()
+            val length = viewModel.getAnimeSkipIntroLength()
+            sendAnimeData(animeId,episodeId,vidListSerialized,vidIndex,length)
             playerControls.resetControlsFade()
         }
     }
