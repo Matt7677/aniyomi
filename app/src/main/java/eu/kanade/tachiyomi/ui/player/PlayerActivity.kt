@@ -1527,7 +1527,7 @@ class PlayerActivity : BaseActivity() {
             val episodeId = intent.getLongExtra("episodeId", -1L)
             val vidIndex = intent.getIntExtra("vidIndex", 0)
             val length = viewModel.getAnimeSkipIntroLength()
-            sendAnimeData(animeId, episodeId,  vidIndex, length)
+            sendAnimeData(animeId, episodeId, vidIndex, length)
             playerControls.resetControlsFade()
         }
     }
