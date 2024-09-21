@@ -153,9 +153,9 @@ class PlayerActivity : BaseActivity() {
             .url(url)
             .build()
         val response = client.newCall(request).execute()
-        return response.body?.string() ?: "No response body" 
+        return response.body?.string() ?: "No response body"
     }
-    override fun onNewIntent(intent: Intent){
+    override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
         val vidList = intent.extras!!.getString("vidList", "")
