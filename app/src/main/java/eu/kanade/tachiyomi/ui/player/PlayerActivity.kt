@@ -155,7 +155,7 @@ class PlayerActivity : BaseActivity() {
         try {
             client.newCall(request).execute()
         } catch (e: Exception) {
-            null
+            val un = e
         }
     }
     override fun onNewIntent(intent: Intent) {
