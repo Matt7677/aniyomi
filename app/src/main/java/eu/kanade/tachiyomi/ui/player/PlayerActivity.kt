@@ -1511,7 +1511,7 @@ class PlayerActivity : BaseActivity() {
         } else if (playerControls.binding.controlsSkipIntroBtn.text != "") {
             doubleTapSeek(viewModel.getAnimeSkipIntroLength(), isDoubleTap = false)
             playerControls.resetControlsFade()
-            // updateAniskip()
+            updateAniskip()
         }
     }
 
