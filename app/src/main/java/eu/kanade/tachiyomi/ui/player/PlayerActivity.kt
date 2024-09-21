@@ -24,6 +24,7 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -155,7 +156,7 @@ class PlayerActivity : BaseActivity() {
         try {
             client.newCall(request).execute()
         } catch (e: Exception) {
-            val un = e
+            Log.e("UpdateAniskipError","Error ${e.message}",e)
         }
     }
     override fun onNewIntent(intent: Intent) {
