@@ -120,12 +120,8 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
-
-
 class PlayerActivity : BaseActivity() {
-
     internal val viewModel by viewModels<PlayerViewModel>()
-
     internal val playerPreferences: PlayerPreferences = Injekt.get()
     private val storageManager: StorageManager = Injekt.get()
     companion object {
@@ -159,7 +155,7 @@ class PlayerActivity : BaseActivity() {
         val response = client.newCall(request).execute()
         return response.body?.string() ?: "No response body" 
     }
-    override fun onNewIntent(intent: Intent) {
+    override fun onNewIntent(intent: Intent){
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
         val vidList = intent.extras!!.getString("vidList", "")
