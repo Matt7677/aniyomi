@@ -157,7 +157,6 @@ class PlayerActivity : BaseActivity() {
         } catch (e: Exception) {
             null
         }
-        
     }
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
