@@ -149,7 +149,7 @@ class PlayerActivity : BaseActivity() {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
         val vidIndex = intent.extras!!.getInt("vidIndex", 0)
-        val url = "http://localhost:5000/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex"
+        val url = "http://192.168.0.195:5000/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex"
         val request = Request.Builder()
             .url(url)
             .build()
