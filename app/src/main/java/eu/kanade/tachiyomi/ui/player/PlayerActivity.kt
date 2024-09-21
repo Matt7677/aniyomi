@@ -1525,7 +1525,7 @@ class PlayerActivity : BaseActivity() {
             doubleTapSeek(viewModel.getAnimeSkipIntroLength(), isDoubleTap = false)
             val animeId = intent.getLongExtra("animeId", -1L)
             val episodeId = intent.getLongExtra("episodeId", -1L)
-            val vidIndex = intent.getIntExtra("vidIndex", 0)
+            val vidIndex = intent.getLongExtra("vidIndex", 0)
             val length = viewModel.getAnimeSkipIntroLength()
             sendAnimeData(animeId, episodeId, vidIndex, length)
             playerControls.resetControlsFade()
