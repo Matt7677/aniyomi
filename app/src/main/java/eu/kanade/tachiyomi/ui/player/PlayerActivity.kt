@@ -124,26 +124,7 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
 
-fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Long, length: Int) {
-    val client = OkHttpClient()
 
-    val json = JSONObject().apply {
-        put("animeId", animeId)
-        put("episodeId", episodeId)
-        put("vidIndex", vidIndex)
-        put("length", length)
-    }
-    val requestBody = json.toString().toRequestBody("application/json".toMediaType())
-    val request = Request.Builder()
-        .url("http://localhost:5000/v2/add-skips")
-        .post(requestBody)
-        .build()
-
-    client.newCall(request).execute().use { response ->
-        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-        println(response.body?.string())
-    }
-}
 class PlayerActivity : BaseActivity() {
 
     internal val viewModel by viewModels<PlayerViewModel>()
@@ -171,7 +152,22 @@ class PlayerActivity : BaseActivity() {
 
         private const val MAX_BRIGHTNESS = 255F
     }
-
+    fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Long, length: Int) {
+        val client = OkHttpClient()
+        val json = JSONObject().apply {
+            put("animeId", animeId)
+            put("episodeId", episodeId)
+            put("vidIndex", vidIndex)
+            put("length", length)
+        }
+        val requestBody = json.toString().toRequestBody("application/json".toMediaType())
+        val request = Request.Builder()
+        .url("http://localhost:5000/v2/add-skips")
+        .post(requestBody)
+        .build()
+        client.newCall(request).execute().use { response ->
+            val n = 0
+    }
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
