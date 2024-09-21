@@ -124,13 +124,12 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
 
-fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidIndex: Int, length: Long) {
+fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Int, length: Long) {
     val client = OkHttpClient()
 
     val json = JSONObject().apply {
         put("animeId", animeId)
         put("episodeId", episodeId)
-        put("vidList", vidList)
         put("vidIndex", vidIndex)
         put("length", length)
     }
@@ -1527,9 +1526,8 @@ class PlayerActivity : BaseActivity() {
             val animeId = intent.getLongExtra("animeId", -1L)
             val episodeId = intent.getLongExtra("episodeId", -1L)
             val vidIndex = intent.getIntExtra("vidIndex", 0)
-            val vidList = intent.getStringExtra("vidList")
             val length = viewModel.getAnimeSkipIntroLength()
-            sendAnimeData(animeId, episodeId, vidList ?: "", vidIndex, length)
+            sendAnimeData(animeId, episodeId,  vidIndex, length)
             playerControls.resetControlsFade()
         }
     }
