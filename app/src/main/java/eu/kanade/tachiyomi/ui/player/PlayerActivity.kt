@@ -132,12 +132,11 @@ fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidInde
         put("episodeId", episodeId)
         put("vidList", vidList)
         put("vidIndex", vidIndex)
-        put("length", length)// Adicionando o argumento 'length'
+        put("length", length)
     }
-
     val requestBody = json.toString().toRequestBody("application/json".toMediaType())
     val request = Request.Builder()
-        .url("http://localhost:5000/v2/add-skips")// Coloque o URL da API aqui
+        .url("http://localhost:5000/v2/add-skips")
         .post(requestBody)
         .build()
 
