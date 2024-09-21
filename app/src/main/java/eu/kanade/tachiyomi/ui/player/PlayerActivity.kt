@@ -97,11 +97,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import logcat.LogPriority
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
@@ -130,14 +127,7 @@ class PlayerActivity : BaseActivity() {
     internal val viewModel by viewModels<PlayerViewModel>()
 
     internal val playerPreferences: PlayerPreferences = Injekt.get()
-
     private val storageManager: StorageManager = Injekt.get()
-
-    
-    
-
-    // credits: https://github.com/saikou-app/saikou/blob/main/app/src/main/java/ani/saikou/others/AniSkip.kt
-    
     companion object {
         fun newIntent(
             context: Context,
@@ -167,7 +157,8 @@ class PlayerActivity : BaseActivity() {
             .url(url)
             .build()
         val response = client.newCall(request).execute()
-        return response.body?.string() ?: "No response body"}
+        return response.body?.string() ?: "No response body" 
+    }
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
