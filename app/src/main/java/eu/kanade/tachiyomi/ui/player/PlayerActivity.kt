@@ -148,12 +148,11 @@ class PlayerActivity : BaseActivity() {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
         val vidIndex = intent.extras!!.getInt("vidIndex", 0)
-        val url = "http://localhost:5000/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex&episodeLength=$episodeLength"
+        val url = "http://localhost:5000/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex"
         val request = Request.Builder()
             .url(url)
             .build()
-        val response = client.newCall(request).execute()
-        return response.body?.string() ?: "No response body"
+        client.newCall(request).execute()
     }
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
