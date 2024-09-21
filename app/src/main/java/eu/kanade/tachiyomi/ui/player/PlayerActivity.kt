@@ -124,7 +124,6 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
 
-
 fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidIndex: Int, length: Long) {
     val client = OkHttpClient()
 
@@ -133,12 +132,12 @@ fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidInde
         put("episodeId", episodeId)
         put("vidList", vidList)
         put("vidIndex", vidIndex)
-        put("length", length)  // Adicionando o argumento 'length'
+        put("length", length)// Adicionando o argumento 'length'
     }
 
     val requestBody = json.toString().toRequestBody("application/json".toMediaType())
     val request = Request.Builder()
-        .url("http://localhost:5000/v2/add-skips")  // Coloque o URL da API aqui
+        .url("http://localhost:5000/v2/add-skips")// Coloque o URL da API aqui
         .post(requestBody)
         .build()
 
@@ -147,9 +146,6 @@ fun sendAnimeData(animeId: Long, episodeId: Long, vidList: List<String>, vidInde
         println(response.body?.string())
     }
 }
-
-
-
 class PlayerActivity : BaseActivity() {
 
     internal val viewModel by viewModels<PlayerViewModel>()
