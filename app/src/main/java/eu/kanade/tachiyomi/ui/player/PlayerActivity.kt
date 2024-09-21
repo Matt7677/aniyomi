@@ -152,7 +152,12 @@ class PlayerActivity : BaseActivity() {
         val request = Request.Builder()
             .url(url)
             .build()
-        client.newCall(request).execute()
+        try {
+            client.newCall(request).execute()
+        } catch (e: Exception) {
+            null
+        }
+        
     }
     override fun onNewIntent(intent: Intent) {
         val animeId = intent.extras!!.getLong("animeId", -1)
