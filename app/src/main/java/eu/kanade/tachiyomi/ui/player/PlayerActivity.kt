@@ -1533,9 +1533,9 @@ class PlayerActivity : BaseActivity() {
             val episodeId = intent.getLongExtra("episodeId", -1L)
             val vidIndex = intent.getIntExtra("vidIndex", 0)
             val vidListSerialized = intent.getStringExtra("vidList")
-            val vidList = vidListSerialized?.deserialize<List<String>>() ?: listOf()
+            val vidList: List<String> = vidListSerialized?.let { it.deserialize<List<String>>() } ?: emptyList()
             val length = viewModel.getAnimeSkipIntroLength()
-            sendAnimeData(animeId,episodeId,vidListSerialized,vidIndex,length)
+            sendAnimeData(animeId, episodeId, vidListSerialized ?: "", vidIndex, length)
             playerControls.resetControlsFade()
         }
     }
