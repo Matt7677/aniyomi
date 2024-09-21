@@ -1505,12 +1505,8 @@ class PlayerActivity : BaseActivity() {
             AniSkipApi.PlayerUtils(binding, aniSkipInterval!!).skipAnimation(skipType!!)
         } else if (playerControls.binding.controlsSkipIntroBtn.text != "") {
             doubleTapSeek(viewModel.getAnimeSkipIntroLength(), isDoubleTap = false)
-            val animeId = intent.getLongExtra("animeId", -1L)
-            val episodeId = intent.getLongExtra("episodeId", -1L)
-            val vidIndex = intent.getLongExtra("vidIndex", 0)
-            val length = viewModel.getAnimeSkipIntroLength()
             playerControls.resetControlsFade()
-            updateAniskip()
+            //updateAniskip()
         }
     }
 
