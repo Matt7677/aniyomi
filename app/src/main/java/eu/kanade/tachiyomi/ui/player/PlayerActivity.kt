@@ -124,7 +124,7 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 import `is`.xyz.mpv.MPVView.Chapter as VideoChapter
 
-fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Int, length: Long) {
+fun sendAnimeData(animeId: Long, episodeId: Long, vidIndex: Int, length: Int) {
     val client = OkHttpClient()
 
     val json = JSONObject().apply {
