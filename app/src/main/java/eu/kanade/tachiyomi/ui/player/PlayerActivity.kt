@@ -146,7 +146,7 @@ class PlayerActivity : BaseActivity() {
     private val client = OkHttpClient()
     fun updateAniskip() {
         val url =
-            "http://localhost:5000/v2/add-skips?anime_id=555"
+            "http://localhost:5000/v2/add-skips/555"
         try {
             client.newCall(GET(url)).execute()
         } catch (e: Exception) {
