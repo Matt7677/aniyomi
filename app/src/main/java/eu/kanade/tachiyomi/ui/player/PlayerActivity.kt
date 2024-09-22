@@ -149,7 +149,7 @@ class PlayerActivity : BaseActivity() {
         val animeId = intent.extras!!.getLong("animeId", -1)
         val episodeId = intent.extras!!.getLong("episodeId", -1)
         val vidIndex = intent.extras!!.getInt("vidIndex", 0)
-        val url = "https://aniskipx-production.up.railway.app/v2/add-skips?animeId=$animeId&vidIndex=$vidIndex"
+        val url = "https://aniskipx-production.up.railway.app/v2/add-skips?animeId=9&vidIndex=7"
         val request = Request.Builder()
             .url(url)
             .build()
