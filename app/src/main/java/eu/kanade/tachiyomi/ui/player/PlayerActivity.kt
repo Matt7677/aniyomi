@@ -147,7 +147,7 @@ class PlayerActivity : BaseActivity() {
     fun updateAniskip() {
         val url =
             "http://localhost:5000/v2/add-skips?anime_id=555"
-        return try {
+        try {
             client.newCall(GET(url)).execute()
         } catch (e: Exception) {
             println(e)
