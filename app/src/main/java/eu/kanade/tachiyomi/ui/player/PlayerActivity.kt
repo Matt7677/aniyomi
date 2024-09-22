@@ -2,7 +2,6 @@ package eu.kanade.tachiyomi.ui.player
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -100,7 +99,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import logcat.LogPriority
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
@@ -152,7 +150,7 @@ class PlayerActivity : BaseActivity() {
         return try {
             client.newCall(GET(url)).execute()
         } catch (e: Exception) {
-            null
+            println(e)
         }
     }
     override fun onNewIntent(intent: Intent) {
