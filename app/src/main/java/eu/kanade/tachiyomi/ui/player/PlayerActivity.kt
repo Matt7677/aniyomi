@@ -53,6 +53,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
 import eu.kanade.tachiyomi.data.notification.Notifications
 import eu.kanade.tachiyomi.databinding.PlayerActivityBinding
+import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.ui.base.activity.BaseActivity
 import eu.kanade.tachiyomi.ui.player.settings.PlayerPreferences
 import eu.kanade.tachiyomi.ui.player.settings.PlayerSettingsScreenModel
@@ -144,25 +145,14 @@ class PlayerActivity : BaseActivity() {
 
         private const val MAX_BRIGHTNESS = 255F
     }
+    private val client = OkHttpClient()
     fun updateAniskip() {
-        val client = OkHttpClient()
-        val animeId = intent.extras!!.getLong("animeId", -1)
-        val episodeId = intent.extras!!.getLong("episodeId", -1)
-        val vidIndex = intent.extras!!.getInt("vidIndex", 0)
-        val url = "https://aniskipx-production.up.railway.app/v2/add-skips?animeId=9&vidIndex=7"
-        val request = Request.Builder()
-            .url(url)
-            .build()
-        try {
-            client.newCall(request).execute()
+        val url =
+            "http://localhost:5000/v2/add-skips?anime_id=555"
+        return try {
+            client.newCall(GET(url)).execute()
         } catch (e: Exception) {
-            runOnUiThread {
-                AlertDialog.Builder(this)
-                    .setTitle("Erro")
-                    .setMessage(e.message)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show()
-            }
+            null
         }
     }
     override fun onNewIntent(intent: Intent) {
